@@ -1,7 +1,7 @@
 package presenter
 
 import (
-	"github.com/denniswon/gowiki/entity"
+	"github.com/denniswon/reddio/entity"
 )
 
 //User data

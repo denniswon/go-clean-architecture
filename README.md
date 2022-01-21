@@ -1,6 +1,6 @@
 # Clean Architecture in Go
 
-[![Build Status](https://travis-ci.org/denniswon/gowiki.svg?branch=master)](https://travis-ci.org/denniswon/gowiki)
+[![Build Status](https://travis-ci.org/denniswon/reddio.svg?branch=master)](https://travis-ci.org/denniswon/reddio)
 
 [Post: Clean Architecture, 2 years later](https://eltonminetto.dev/en/post/2020-07-06-clean-architecture-2years-later/)
 
@@ -12,7 +12,7 @@
 
   make test
 
-## API requests 
+## API requests
 
 ### Add book
 
@@ -92,7 +92,7 @@ curl "http://localhost:8080/v1/loan/return/be8b1757-b043-4dbd-b873-63fa9ecd8bb1"
 
 
 
-## CMD 
+## CMD
 
 ### Search for a book
 

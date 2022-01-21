@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/denniswon/gowiki/entity"
+	"github.com/denniswon/reddio/entity"
 
 	"github.com/stretchr/testify/assert"
 )

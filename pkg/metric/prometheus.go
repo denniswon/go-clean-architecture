@@ -1,7 +1,7 @@
 package metric
 
 import (
-	"github.com/denniswon/gowiki/config"
+	"github.com/denniswon/reddio/config"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/push"
 )

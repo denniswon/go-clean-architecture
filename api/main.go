@@ -6,20 +6,19 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"strconv"
 	"time"
 
-	"github.com/denniswon/gowiki/infrastructure/repository"
-	"github.com/denniswon/gowiki/usecase/user"
+	"github.com/denniswon/reddio/infrastructure/repository"
+	"github.com/denniswon/reddio/usecase/user"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"github.com/codegangsta/negroni"
-	"github.com/denniswon/gowiki/api/handler"
-	"github.com/denniswon/gowiki/api/middleware"
-	"github.com/denniswon/gowiki/config"
-	"github.com/denniswon/gowiki/pkg/metric"
+	"github.com/denniswon/reddio/api/handler"
+	"github.com/denniswon/reddio/api/middleware"
+	"github.com/denniswon/reddio/config"
+	"github.com/denniswon/reddio/pkg/metric"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/context"
 	"github.com/gorilla/mux"
@@ -54,9 +53,6 @@ func main() {
 	handler.MakeUserHandlers(r, *n, userService)
 
 	//static
-	currentDir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-	staticPath := filepath.Join(currentDir, "../static")
-	handler.MakeStaticHandlers(r, staticPath, "appMain.html")
 	http.Handle("/", r)
 
 	http.Handle("/metrics", promhttp.Handler())

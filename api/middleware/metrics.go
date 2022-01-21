@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/denniswon/gowiki/pkg/metric"
+	"github.com/denniswon/reddio/pkg/metric"
 
 	"github.com/codegangsta/negroni"
 )

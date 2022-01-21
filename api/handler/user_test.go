@@ -9,9 +9,9 @@ import (
 	"testing"
 
 	"github.com/codegangsta/negroni"
-	"github.com/denniswon/gowiki/api/presenter"
-	"github.com/denniswon/gowiki/entity"
-	"github.com/denniswon/gowiki/usecase/user/mock"
+	"github.com/denniswon/reddio/api/presenter"
+	"github.com/denniswon/reddio/entity"
+	"github.com/denniswon/reddio/usecase/user/mock"
 	"github.com/golang/mock/gomock"
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"

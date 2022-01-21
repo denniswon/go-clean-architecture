@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/denniswon/gowiki/entity"
+	"github.com/denniswon/reddio/entity"
 )
 
 //inmem in memory repo

@@ -5,11 +5,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/denniswon/gowiki/usecase/user"
+	"github.com/denniswon/reddio/usecase/user"
 
-	"github.com/denniswon/gowiki/api/presenter"
+	"github.com/denniswon/reddio/api/presenter"
 
-	"github.com/denniswon/gowiki/entity"
+	"github.com/denniswon/reddio/entity"
 
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"

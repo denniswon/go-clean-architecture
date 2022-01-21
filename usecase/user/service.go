@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/denniswon/gowiki/entity"
+	"github.com/denniswon/reddio/entity"
 )
 
 //Service  interface

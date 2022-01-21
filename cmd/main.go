@@ -7,11 +7,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/denniswon/gowiki/config"
+	"github.com/denniswon/reddio/config"
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/denniswon/gowiki/pkg/metric"
+	"github.com/denniswon/reddio/pkg/metric"
 )
 
 func handleParams() (string, error) {

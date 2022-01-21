@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/denniswon/gowiki/entity"
+	"github.com/denniswon/reddio/entity"
 )
 
 //Reader interface
