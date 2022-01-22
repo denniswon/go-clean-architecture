@@ -40,7 +40,7 @@ serve-cmd: ./$(BIN_DIR)/search
 build-mocks:
 	@go get github.com/golang/mock/gomock
 	@go install github.com/golang/mock/mockgen
-	@~/go/bin/mockgen -source=usecase/user/interface.go -destination=usecase/user/mock/user.go -package=mock
+	@~/go/bin/mockgen -source=module/user/interface.go -destination=module/user/mock/user.go -package=mock
 
 test:
 	go test -tags testing ./...

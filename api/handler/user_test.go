@@ -9,9 +9,9 @@ import (
 	"testing"
 
 	"github.com/codegangsta/negroni"
-	"github.com/denniswon/reddio/api/presenter"
+	"github.com/denniswon/reddio/api/model"
 	"github.com/denniswon/reddio/entity"
-	"github.com/denniswon/reddio/usecase/user/mock"
+	"github.com/denniswon/reddio/module/user/mock"
 	"github.com/golang/mock/gomock"
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"
@@ -20,7 +20,7 @@ import (
 func Test_listUsers(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	m := mock.NewMockUseCase(controller)
+	m := mock.NewMockModule(controller)
 	r := mux.NewRouter()
 	n := negroni.New()
 	MakeUserHandlers(r, *n, m)
@@ -43,7 +43,7 @@ func Test_listUsers(t *testing.T) {
 func Test_listUsers_NotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	m := mock.NewMockUseCase(controller)
+	m := mock.NewMockModule(controller)
 	ts := httptest.NewServer(listUsers(m))
 	defer ts.Close()
 	m.EXPECT().
@@ -57,7 +57,7 @@ func Test_listUsers_NotFound(t *testing.T) {
 func Test_listUsers_Search(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	m := mock.NewMockUseCase(controller)
+	m := mock.NewMockModule(controller)
 	u := &entity.User{
 		ID: entity.NewID(),
 	}
@@ -74,7 +74,7 @@ func Test_listUsers_Search(t *testing.T) {
 func Test_createUser(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	m := mock.NewMockUseCase(controller)
+	m := mock.NewMockModule(controller)
 	r := mux.NewRouter()
 	n := negroni.New()
 	MakeUserHandlers(r, *n, m)
@@ -99,7 +99,7 @@ func Test_createUser(t *testing.T) {
 	resp, _ := http.Post(ts.URL+"/v1/user", "application/json", strings.NewReader(payload))
 	assert.Equal(t, http.StatusCreated, resp.StatusCode)
 
-	var u *presenter.User
+	var u *model.User
 	json.NewDecoder(resp.Body).Decode(&u)
 	assert.Equal(t, "Ozzy Osbourne", fmt.Sprintf("%s %s", u.FirstName, u.LastName))
 }
@@ -107,7 +107,7 @@ func Test_createUser(t *testing.T) {
 func Test_getUser(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	m := mock.NewMockUseCase(controller)
+	m := mock.NewMockModule(controller)
 	r := mux.NewRouter()
 	n := negroni.New()
 	MakeUserHandlers(r, *n, m)
@@ -127,7 +127,7 @@ func Test_getUser(t *testing.T) {
 	res, err := http.Get(ts.URL + "/v1/user/" + u.ID.String())
 	assert.Nil(t, err)
 	assert.Equal(t, http.StatusOK, res.StatusCode)
-	var d *presenter.User
+	var d *model.User
 	json.NewDecoder(res.Body).Decode(&d)
 	assert.NotNil(t, d)
 	assert.Equal(t, u.ID, d.ID)
@@ -136,7 +136,7 @@ func Test_getUser(t *testing.T) {
 func Test_deleteUser(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	m := mock.NewMockUseCase(controller)
+	m := mock.NewMockModule(controller)
 	r := mux.NewRouter()
 	n := negroni.New()
 	MakeUserHandlers(r, *n, m)

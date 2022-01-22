@@ -7,7 +7,7 @@ import (
 	"github.com/denniswon/reddio/entity"
 )
 
-//Service  interface
+//Service interface
 type Service struct {
 	repo Repository
 }

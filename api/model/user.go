@@ -1,4 +1,4 @@
-package presenter
+package model
 
 import (
 	"github.com/denniswon/reddio/entity"

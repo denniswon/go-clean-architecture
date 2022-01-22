@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/denniswon/reddio/usecase/user"
+	"github.com/denniswon/reddio/module/user"
 
-	"github.com/denniswon/reddio/api/presenter"
+	"github.com/denniswon/reddio/api/model"
 
 	"github.com/denniswon/reddio/entity"
 
@@ -15,7 +15,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func listUsers(service user.UseCase) http.Handler {
+func listUsers(service user.Module) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		errorMessage := "Error reading users"
 		var data []*entity.User
@@ -39,9 +39,9 @@ func listUsers(service user.UseCase) http.Handler {
 			w.Write([]byte(errorMessage))
 			return
 		}
-		var toJ []*presenter.User
+		var toJ []*model.User
 		for _, d := range data {
-			toJ = append(toJ, &presenter.User{
+			toJ = append(toJ, &model.User{
 				ID:        d.ID,
 				Email:     d.Email,
 				FirstName: d.FirstName,
@@ -55,7 +55,7 @@ func listUsers(service user.UseCase) http.Handler {
 	})
 }
 
-func createUser(service user.UseCase) http.Handler {
+func createUser(service user.Module) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		errorMessage := "Error adding user"
 		var input struct {
@@ -78,7 +78,7 @@ func createUser(service user.UseCase) http.Handler {
 			w.Write([]byte(errorMessage))
 			return
 		}
-		toJ := &presenter.User{
+		toJ := &model.User{
 			ID:        id,
 			Email:     input.Email,
 			FirstName: input.FirstName,
@@ -94,7 +94,7 @@ func createUser(service user.UseCase) http.Handler {
 	})
 }
 
-func getUser(service user.UseCase) http.Handler {
+func getUser(service user.Module) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		errorMessage := "Error reading user"
 		vars := mux.Vars(r)
@@ -117,7 +117,7 @@ func getUser(service user.UseCase) http.Handler {
 			w.Write([]byte(errorMessage))
 			return
 		}
-		toJ := &presenter.User{
+		toJ := &model.User{
 			ID:        data.ID,
 			Email:     data.Email,
 			FirstName: data.FirstName,
@@ -130,7 +130,7 @@ func getUser(service user.UseCase) http.Handler {
 	})
 }
 
-func deleteUser(service user.UseCase) http.Handler {
+func deleteUser(service user.Module) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		errorMessage := "Error removing user"
 		vars := mux.Vars(r)
@@ -150,7 +150,7 @@ func deleteUser(service user.UseCase) http.Handler {
 }
 
 //MakeUserHandlers make url handlers
-func MakeUserHandlers(r *mux.Router, n negroni.Negroni, service user.UseCase) {
+func MakeUserHandlers(r *mux.Router, n negroni.Negroni, service user.Module) {
 	r.Handle("/v1/user", n.With(
 		negroni.Wrap(listUsers(service)),
 	)).Methods("GET", "OPTIONS").Name("listUsers")

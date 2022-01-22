@@ -10,7 +10,9 @@ import (
 	"time"
 
 	"github.com/denniswon/reddio/infrastructure/repository"
-	"github.com/denniswon/reddio/usecase/user"
+	"github.com/denniswon/reddio/module/ethereum"
+	"github.com/denniswon/reddio/module/user"
+	"github.com/ethereum/go-ethereum/ethclient"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
@@ -37,6 +39,13 @@ func main() {
 	userRepo := repository.NewUserMySQL(db)
 	userService := user.NewService(userRepo)
 
+	// Create a client instance to connect to our provider
+	client, err := ethclient.Dial("http://localhost:8545")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	ethereumService := ethereum.NewService(*client)
+
 	metricService, err := metric.NewPrometheusService()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -51,6 +60,9 @@ func main() {
 
 	//user
 	handler.MakeUserHandlers(r, *n, userService)
+
+	//ethereum
+	handler.MakeEthereumHandlers(r, *n, ethereumService)
 
 	//static
 	http.Handle("/", r)

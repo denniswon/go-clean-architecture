@@ -24,8 +24,8 @@ type Repository interface {
 	Writer
 }
 
-//UseCase interface
-type UseCase interface {
+//Module interface
+type Module interface {
 	GetUser(id entity.ID) (*entity.User, error)
 	SearchUsers(query string) ([]*entity.User, error)
 	ListUsers() ([]*entity.User, error)
